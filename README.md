@@ -6,7 +6,9 @@
 
 ## 1. Qué es
 
-DCB tiene un solo núcleo: ningún artefacto —ni la definición del proyecto ni su plan de implementación— avanza a construcción sin haber sido auditado críticamente primero.
+Define-Challenge-Build (DCB) es una metodología de planificación de proyectos de software. Separa la definición de un proyecto (el Qué) de su plan de implementación (el Cómo), y exige que cada uno pase por una auditoría crítica —el Challenge— antes de avanzar a la siguiente fase.
+
+Su núcleo es ese Challenge: ningún artefacto, ni la Definición ni el Roadmap, avanza a construcción sin haber sido cuestionado primero.
 
 El Challenge se puede ejecutar de tres formas:
 - **Solo expertos humanos.**
