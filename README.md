@@ -1,9 +1,3 @@
-He actualizado la especificación de tu metodología para incorporar formalmente la estructura interna de los roadmaps con su mini-definición y sus tareas en fases con checkboxes.
-
-Aquí tienes el documento completo con el cambio integrado en la sección **9.2** y un ejemplo añadido en la **14** para que se vea claramente cómo se ve por dentro un archivo de roadmap:
-
----
-
 # Define-Challenge-Build (DCB)
 
 > Metodología de planificación que separa el diseño (el Qué) de su implementación (el Cómo). Ambos pasan por un cuestionamiento crítico obligatorio antes de avanzar a la siguiente fase.
