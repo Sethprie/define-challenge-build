@@ -209,6 +209,8 @@ Se genera `roadmaps/roadmap-reservas/v1.md`:
 
 ```
 
+NOTA: Los roadmaps deben ser siempre deterministas, nada de cosas "por confirmar" ni nada pretendiendo que sea agregado en una version posterior, para eso es el challenge. Tampoco pueden tener referencias a otros roadmaps ni a DEFINITION.md. Las versiones posteriores son exclusivas para correciones, no para agregar más contenido. Si se quiere agregar más contenido en el feature de un roadmap ya completado, se debe hacer un roadmap aparte.
+
 **Paso 4 — Challenge sobre el Roadmap.**
 Se objeta que el mecanismo de bloqueo propuesto no escala bien con múltiples canchas concurrentes. Se ajusta a v1.1 y se vuelve a auditar.
 
