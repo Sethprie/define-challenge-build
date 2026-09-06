@@ -43,7 +43,7 @@ DCB separa la meta del proyecto de su ejecución en dos artefactos independiente
 | Artefacto | Responde a | Naturaleza |
 | --- | --- | --- |
 | **Archivo de Definición** | El Qué | Estático — objetivos, reglas de negocio, alcance y restricciones |
-| **Roadmap** | El Cómo | Dinámico y versionado — ruta técnica de implementación |
+| **Roadmap** | El Cómo | Dinámico y versionado con git — ruta técnica de implementación |
 
 Si el Roadmap cambia, la Definición se mantiene intacta.
 
@@ -55,7 +55,7 @@ Se extraen los requerimientos y se redacta una primera propuesta del Archivo de 
 
 ### 5.2 Challenge
 
-El artefacto recién generado —Definición o Roadmap— se audita antes de aceptarse, con expertos, IA, o ambos combinados (ver §1).
+El artefacto recién generado —Definición o Roadmap— se audita antes de aceptarse, con expertos, IA, o ambos combinados (ver sección 1).
 
 Se aplica dos veces:
 
@@ -66,13 +66,13 @@ Un artefacto se considera consolidado cuando supera su Challenge correspondiente
 
 ### 5.3 Build
 
-Con la Definición blindada y el Roadmap validado, se construye. Si surge un imprevisto que afecta al Roadmap, se versiona y vuelve a pasar por Challenge, sin tocar la Definición. Si el imprevisto revela que el "Qué" original era inviable, se vuelve a Define.
+Con la Definición blindada y el Roadmap validado, se construye. Si surge un imprevisto que afecta al Roadmap, se corrige el archivo y vuelve a pasar por Challenge, sin tocar la Definición. Si el imprevisto revela que el "Qué" original era inviable, se vuelve a Define.
 
 ## 6. Cuándo usarla
 
 * Vas a usar IA para diseñar o planear un sistema, no solo para generar código puntual.
 * El proyecto tiene requerimientos ambiguos o cambiantes.
-* Trabajás solo y necesitás un mecanismo externo de verificación.
+* Trabajas solo y necesitas un mecanismo externo de verificación.
 * Construir sobre un diseño equivocado te sale caro.
 
 ## 7. Cuándo no usarla
@@ -103,26 +103,28 @@ Documento maestro y estático. Objetivos, reglas de negocio, alcance y restricci
 
 ### 9.2 Roadmap (el Cómo)
 
-Documentos dinámicos y versionados que trazan la ruta técnica de implementación, referenciando siempre a la Definición aprobada.
+Documento dinámico que traza la ruta técnica de implementación, referenciando siempre a la Definición aprobada.
+
+Cada Roadmap vive en un único archivo. El historial de cambios se sigue con git (commits), no duplicando el archivo por versión. La excepción es cuando el proyecto no usa ningún sistema de control de versiones: en ese caso sí conviene nombrar los archivos con sufijos v1, v2, v3, etc., para poder distinguirlos.
 
 *Estructura recomendada del archivo de Roadmap:*
 Cada Roadmap es autocontenido y debe estructurarse internamente con:
 
-* **Mini-Definición:** Una breve descripción inicial del problema específico que resuelve ese roadmap y a qué sección del `DEFINITION.md` apunta.
+* **Definición:** Una breve descripción inicial del problema específico que resuelve ese roadmap y a qué sección del `DEFINITION.md` apunta.
 * **Fases y Tareas Atómicas:** Desglose paso a paso (ej. Backend, Frontend) organizado con casillas de verificación (`- [ ]`) para el seguimiento del Build.
 
 ### 9.3 Prompts de Challenge
 
-Instrucciones para auditar la Definición y el Roadmap. Este repositorio no incluye prompts de ejemplo: escribilos vos mismo, según los riesgos reales de tu proyecto.
+Instrucciones para auditar la Definición y el Roadmap. Este repositorio no incluye prompts de ejemplo: deben redactarse según los riesgos reales del proyecto.
 
 ## 10. Cómo separar la Definición de los Roadmaps
 
 * **Un único Archivo de Definición por proyecto**, en la raíz del repositorio. No se fragmenta por módulo ni por sprint.
 * **Un Roadmap por unidad de entrega** (módulo, feature, milestone técnico), no uno monolítico.
-* **Cada Roadmap referencia qué secciones de la Definición implementa** (ej. "Implementa Definición §3.2 y §4.1").
+* **Cada Roadmap referencia qué secciones de la Definición implementa** (ej. "Implementa Definición, secciones 3.2 y 4.1").
 * **La Definición no lleva detalles de implementación** — stack, librerías, endpoints, esquemas de base de datos.
 * **El Roadmap no redefine objetivos de negocio.** Si al construirlo aparece que la Definición es ambigua o inviable, se vuelve a Define.
-* **Versionado independiente.** Definición: v1, v2, v3 (cada una pasa por Challenge). Roadmaps: v1.1, v1.2... (absorben imprevistos del Build sin tocar la Definición).
+* **Versionado con git.** Definición y Roadmaps son archivos únicos; cada cambio se registra como un commit, y ese historial es el que muestra la evolución del artefacto. Solo si el proyecto no usa git u otro control de versiones tiene sentido nombrar archivos como v1, v2, v3.
 
 ## 11. Estructura de proyecto recomendada
 
@@ -133,25 +135,24 @@ mi-proyecto/
 │
 ├── roadmaps/
 │   ├── roadmap-auth/
-│   │   ├── v1.md
-│   │   ├── v1.1.md
+│   │   ├── roadmap.md
 │   │   └── challenge-log.md
 │   ├── roadmap-pagos/
-│   │   ├── v1.md
+│   │   ├── roadmap.md
 │   │   └── challenge-log.md
 │   └── roadmap-notificaciones/
-│       ├── v1.md
+│       ├── roadmap.md
 │       └── challenge-log.md
 │
 ├── prompts/
 │   └── challenge/
-│       └── ...                    # Prompts escritos por el equipo (ver §9.3)
+│       └── ...                    # Prompts escritos por el equipo (ver sección 9.3)
 │
 └── src/                            # Código construido a partir de los roadmaps consolidados
 
 ```
 
-La Definición aislada en la raíz se encuentra sin revisar código ni roadmaps. Cada carpeta en `roadmaps/` es autocontenida: tiene su propio historial de versiones y su propio log de Challenge. Los `challenge-log.md` registran quién cuestionó qué y cómo se resolvió.
+La Definición aislada en la raíz se encuentra sin revisar código ni roadmaps. Cada carpeta en `roadmaps/` es autocontenida: tiene su propio archivo de roadmap y su propio log de Challenge. Los cambios sobre `roadmap.md` a lo largo del tiempo se siguen con git, no con archivos duplicados. Los `challenge-log.md` registran quién cuestionó qué y cómo se resolvió.
 
 ## 12. Roadmaps como Spec-Driven Development hiperespecífico
 
@@ -162,7 +163,7 @@ Para equipos que usan agentes de codificación (Claude Code u otros), esto signi
 * Las decisiones de arquitectura y alcance ya se cerraron en Define + Challenge, no se toman durante el Build.
 * El agente no infiere intención de negocio — vive en la Definición referenciada.
 * Cada paso del Roadmap es una tarea atómica y verificable.
-* Si el agente encuentra una inconsistencia, el protocolo ya existe: re-versionar el Roadmap, o volver a Define si el problema es de fondo.
+* Si el agente encuentra una inconsistencia, el protocolo ya existe: corregir el Roadmap (y dejarlo registrado en git), o volver a Define si el problema es de fondo.
 
 ## 13. DCB y Vertical Slice Architecture
 
@@ -174,7 +175,7 @@ Aplicar DCB por feature trae:
 
 * **Challenge más acotado.** Auditar una sola feature es más rápido que auditar todo el sistema junto.
 * **Paralelización real.** Distintas features pueden estar en distintas etapas de DCB al mismo tiempo.
-* **Cambios contenidos.** Re-versionar el Roadmap de una feature no afecta al resto.
+* **Cambios contenidos.** Corregir el Roadmap de una feature no afecta al resto.
 * **Trazabilidad feature por feature.**
 
 ## 14. Ejemplo de uso
@@ -190,15 +191,15 @@ El equipo (expertos + IA) audita el borrador:
 * Falta especificar qué pasa si dos usuarios reservan la misma cancha en el mismo instante.
 * Falta definir el manejo de cancelaciones por lluvia en canchas al aire libre.
 
-Se registra en `CHALLENGE_LOG.md`, se corrige, se repite hasta no tener objeciones abiertas. La Definición queda consolidada como v1.
+Se registra en `CHALLENGE_LOG.md`, se corrige, se repite hasta no tener objeciones abiertas. La Definición queda consolidada.
 
-**Paso 3 — Define (Roadmap con mini-definición y tareas).**
-Se genera `roadmaps/roadmap-reservas/v1.md`:
+**Paso 3 — Define (Roadmap con definición y tareas).**
+Se genera `roadmaps/roadmap-reservas/roadmap.md`:
 
 ```markdown
-# Roadmap: Reservas de Canchas (v1)
-## 1. Mini-Definición
-- **Qué resuelve:** Implementa la lógica de bloqueo y registro de turnos referenciando la Definición §3.
+# Roadmap: Reservas de Canchas
+## 1. Definición
+- **Qué resuelve:** Implementa la lógica de bloqueo y registro de turnos referenciando la Definición, sección 3.
 - **Alcance:** Excluye pagos online por ahora; solo reserva operativa interna.
 
 ## 2. Fases y Tareas
@@ -209,10 +210,10 @@ Se genera `roadmaps/roadmap-reservas/v1.md`:
 
 ```
 
-NOTA: Los roadmaps deben ser siempre deterministas, nada de cosas "por confirmar" ni nada pretendiendo que sea agregado en una version posterior, para eso es el challenge. Tampoco pueden tener referencias a otros roadmaps ni a DEFINITION.md. Las versiones posteriores son exclusivas para correciones, no para agregar más contenido. Si se quiere agregar más contenido en el feature de un roadmap ya completado, se debe hacer un roadmap aparte.
+NOTA: Los roadmaps deben ser siempre deterministas, nada de cosas "por confirmar" ni nada pretendiendo que sea agregado más adelante, para eso es el Challenge. Tampoco pueden tener referencias a otros roadmaps ni a `DEFINITION.md`. Los cambios posteriores sobre el mismo archivo son exclusivos para correcciones, no para agregar más contenido; ese historial de cambios queda en git. Si se quiere agregar más contenido al feature de un roadmap ya completado, se debe hacer un roadmap aparte.
 
 **Paso 4 — Challenge sobre el Roadmap.**
-Se objeta que el mecanismo de bloqueo propuesto no escala bien con múltiples canchas concurrentes. Se ajusta a v1.1 y se vuelve a auditar.
+Se objeta que el mecanismo de bloqueo propuesto no escala bien con múltiples canchas concurrentes. Se corrige `roadmap.md` y se vuelve a auditar; el cambio queda documentado en `challenge-log.md` y registrado como commit en git.
 
 **Paso 5 — Build.**
-El Roadmap v1.1 se entrega directamente a un agente de codificación como spec de ejecución. Durante el Build aparece un imprevisto (la librería elegida no soporta el motor de base de datos del cliente): se re-versiona a v1.2, documentado en `challenge-log.md`, sin tocar `DEFINITION.md`.
+El Roadmap consolidado se entrega directamente a un agente de codificación como spec de ejecución. Durante el Build aparece un imprevisto (la librería elegida no soporta el motor de base de datos del cliente): se corrige `roadmap.md`, se documenta el motivo en `challenge-log.md`, y el cambio queda versionado en git, sin tocar `DEFINITION.md`.
