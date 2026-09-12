@@ -103,14 +103,14 @@ Documento maestro y estático. Objetivos, reglas de negocio, alcance y restricci
 
 ### 9.2 Roadmap (el Cómo)
 
-Documento dinámico que traza la ruta técnica de implementación, referenciando siempre a la Definición aprobada.
+Documento dinámico que traza la ruta técnica de implementación, sin depender de referencias a un archivo concreto de Definición.
 
 Cada Roadmap vive en un único archivo. El historial de cambios se sigue con git (commits), no duplicando el archivo por versión. La excepción es cuando el proyecto no usa ningún sistema de control de versiones: en ese caso sí conviene nombrar los archivos con sufijos v1, v2, v3, etc., para poder distinguirlos.
 
 *Estructura recomendada del archivo de Roadmap:*
 Cada Roadmap es autocontenido y debe estructurarse internamente con:
 
-* **Definición:** Una breve descripción inicial del problema específico que resuelve ese roadmap y a qué sección del `DEFINITION.md` apunta.
+* **Definición:** Una breve descripción inicial del problema específico que resuelve ese roadmap y qué parte de la Definición aprobada cubre, sin nombrar archivos ni anclarlo a un documento externo.
 * **Fases y Tareas Atómicas:** Desglose paso a paso (ej. Backend, Frontend) organizado con casillas de verificación (`- [ ]`) para el seguimiento del Build.
 
 ### 9.3 Prompts de Challenge
@@ -121,7 +121,7 @@ Instrucciones para auditar la Definición y el Roadmap. Este repositorio no incl
 
 * **Un único Archivo de Definición por proyecto**, en la raíz del repositorio. No se fragmenta por módulo ni por sprint.
 * **Un Roadmap por unidad de entrega** (módulo, feature, milestone técnico), no uno monolítico.
-* **Cada Roadmap referencia qué secciones de la Definición implementa** (ej. "Implementa Definición, secciones 3.2 y 4.1").
+* **Cada Roadmap es autocontenido** y describe la entrega que implementa sin depender de referencias a otros artefactos ni de nombres de archivo.
 * **La Definición no lleva detalles de implementación** — stack, librerías, endpoints, esquemas de base de datos.
 * **El Roadmap no redefine objetivos de negocio.** Si al construirlo aparece que la Definición es ambigua o inviable, se vuelve a Define.
 * **Versionado con git.** Definición y Roadmaps son archivos únicos; cada cambio se registra como un commit, y ese historial es el que muestra la evolución del artefacto. Solo si el proyecto no usa git u otro control de versiones tiene sentido nombrar archivos como v1, v2, v3.
@@ -130,7 +130,7 @@ Instrucciones para auditar la Definición y el Roadmap. Este repositorio no incl
 
 ```
 mi-proyecto/
-├── DEFINITION.md                 # El Qué — único, estático, fuente de verdad
+├── definition.md                  # El Qué — único, estático, fuente de verdad
 ├── CHALLENGE_LOG.md               # Historial de Challenges sobre la Definición
 │
 ├── roadmaps/
@@ -183,7 +183,7 @@ Aplicar DCB por feature trae:
 Proyecto: una plataforma de reservas de canchas deportivas para un club.
 
 **Paso 1 — Define (Definición).**
-Se recogen los requerimientos del cliente (reglas de reserva, roles de usuario, cancelaciones, restricciones legales) y se redacta la primera versión de `DEFINITION.md`.
+Se recogen los requerimientos del cliente (reglas de reserva, roles de usuario, cancelaciones, restricciones legales) y se redacta la primera versión de la Definición.
 
 **Paso 2 — Challenge sobre la Definición.**
 El equipo (expertos + IA) audita el borrador:
@@ -210,10 +210,10 @@ Se genera `roadmaps/roadmap-reservas/roadmap.md`:
 
 ```
 
-NOTA: Los roadmaps deben ser siempre deterministas, nada de cosas "por confirmar" ni nada pretendiendo que sea agregado más adelante, para eso es el Challenge. Tampoco pueden tener referencias a otros roadmaps ni a `DEFINITION.md`. Los cambios posteriores sobre el mismo archivo son exclusivos para correcciones, no para agregar más contenido; ese historial de cambios queda en git. Si se quiere agregar más contenido al feature de un roadmap ya completado, se debe hacer un roadmap aparte.
+NOTA: Los roadmaps deben ser siempre deterministas, nada de cosas "por confirmar" ni nada pretendiendo que sea agregado más adelante, para eso es el Challenge. Tampoco pueden tener referencias a otros roadmaps ni a la Definición. Los cambios posteriores sobre el mismo archivo son exclusivos para correcciones, no para agregar más contenido; ese historial de cambios queda en git. Si se quiere agregar más contenido al feature de un roadmap ya completado, se debe hacer un roadmap aparte.
 
 **Paso 4 — Challenge sobre el Roadmap.**
 Se objeta que el mecanismo de bloqueo propuesto no escala bien con múltiples canchas concurrentes. Se corrige `roadmap.md` y se vuelve a auditar; el cambio queda documentado en `challenge-log.md` y registrado como commit en git.
 
 **Paso 5 — Build.**
-El Roadmap consolidado se entrega directamente a un agente de codificación como spec de ejecución. Durante el Build aparece un imprevisto (la librería elegida no soporta el motor de base de datos del cliente): se corrige `roadmap.md`, se documenta el motivo en `challenge-log.md`, y el cambio queda versionado en git, sin tocar `DEFINITION.md`.
+El Roadmap consolidado se entrega directamente a un agente de codificación como spec de ejecución. Durante el Build aparece un imprevisto (la librería elegida no soporta el motor de base de datos del cliente): se corrige `roadmap.md`, se documenta el motivo en `challenge-log.md`, y el cambio queda versionado en git, sin tocar la Definición.
