@@ -212,6 +212,8 @@ Se genera `roadmaps/roadmap-reservas/roadmap.md`:
 
 NOTA: Los roadmaps deben ser siempre deterministas, nada de cosas "por confirmar" ni nada pretendiendo que sea agregado más adelante, para eso es el Challenge. Tampoco pueden tener referencias a otros roadmaps ni a la Definición. Los cambios posteriores sobre el mismo archivo son exclusivos para correcciones, no para agregar más contenido; ese historial de cambios queda en git. Si se quiere agregar más contenido al feature de un roadmap ya completado, se debe hacer un roadmap aparte.
 
+"El roadmap es para decisiones de diseño y contrato del sistema, no un log de cada ajuste fino que hiciste sobre la marcha."
+
 **Paso 4 — Challenge sobre el Roadmap.**
 Se objeta que el mecanismo de bloqueo propuesto no escala bien con múltiples canchas concurrentes. Se corrige `roadmap.md` y se vuelve a auditar; el cambio queda documentado en `challenge-log.md` y registrado como commit en git.
 
