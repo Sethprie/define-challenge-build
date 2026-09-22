@@ -1,221 +1,229 @@
 # Define-Challenge-Build (DCB)
 
-> Metodología de planificación que separa el diseño (el Qué) de su implementación (el Cómo). Ambos pasan por un cuestionamiento crítico obligatorio antes de avanzar a la siguiente fase.
+> A planning methodology that separates design (the What) from implementation (the How). Both must pass a mandatory critical review before moving to the next phase.
 
 ---
 
-## 1. Qué es
+## 1. What it is
 
-Define-Challenge-Build (DCB) es una metodología de planificación de proyectos de software. Separa la definición de un proyecto (el Qué) de su plan de implementación (el Cómo), y exige que cada uno pase por una auditoría crítica —el Challenge— antes de avanzar a la siguiente fase.
+Define-Challenge-Build (DCB) is a software project planning methodology. It separates a project's definition (the What) from its implementation plan (the How), and requires each one to pass a critical audit —the Challenge— before advancing to the next phase.
 
-Su núcleo es ese Challenge: ningún artefacto, ni la Definición ni el Roadmap, avanza a construcción sin haber sido cuestionado primero.
+Its core is that Challenge: no artifact, neither the Definition nor the Roadmap, moves into construction without being challenged first.
 
-El Challenge se puede ejecutar de tres formas:
+The Challenge can be carried out in three ways:
 
-* **Solo expertos humanos.**
-* **Solo IA.**
-* **Expertos humanos + IA**, combinados. Esta es la forma recomendada: la IA aporta información, precedentes o riesgos que un experto no siempre tiene presentes en el momento, y el experto aporta el criterio para filtrar qué tan aplicable es eso al proyecto real.
-
-```
-[Requerimientos] → [Define: "Qué"] → [Challenge #1] → [Definición Consolidada]
-      → [Define: "Cómo" / Roadmap] → [Challenge #2] → [Build]
+* **Human experts only.**
+* **AI only.**
+* **Human experts + AI**, combined. This is the recommended approach: AI surfaces information, precedents, or risks that an expert doesn't always have top of mind, and the expert provides the judgment to filter how applicable that is to the real project.
 
 ```
+[Requirements] → [Define: "What"] → [Challenge #1] → [Consolidated Definition]
+      → [Define: "How" / Roadmap] → [Challenge #2] → [Build]
 
-## 2. Qué NO es
+```
 
-DCB no es una metodología de ejecución. No compite con Scrum, Kanban ni Waterfall, y no dice cómo organizar sprints ni gestionar un equipo. Actúa antes de eso: define cómo se valida un plan, no cómo se ejecuta.
+## 2. What it is not
 
-Es similar al Spec-Driven Development (SDD): ambos separan especificación de implementación. La diferencia es que en DCB el Challenge es un paso obligatorio, no una revisión opcional, y se aplica dos veces: sobre la Definición y sobre el Roadmap.
+DCB is not an execution methodology. It doesn't compete with Scrum, Kanban, or Waterfall, and it doesn't dictate how to run sprints or manage a team. It operates before that: it defines how a plan gets validated, not how it gets executed.
 
-## 3. Objetivos
+It's similar to Spec-Driven Development (SDD): both separate specification from implementation. The difference is that in DCB the Challenge is a mandatory step, not an optional review, and it's applied twice: on the Definition and on the Roadmap.
 
-* Que un plan mal definido o ambiguo no llegue a construcción sin ser detectado.
-* Reducir el riesgo de construir sobre supuestos sin verificar.
-* Separar qué se construye de cómo se construye, para que un cambio técnico no obligue a redefinir el objetivo del proyecto.
+## 3. Goals
 
-Cuando el contenido de la Definición o el Roadmap lo genera una IA, el Challenge actúa como control directo contra sus fallos típicos: alucinación, exceso de confianza, avance sobre supuestos sin verificar.
+* Prevent a poorly defined or ambiguous plan from reaching construction undetected.
+* Reduce the risk of building on unverified assumptions.
+* Separate what gets built from how it gets built, so a technical change doesn't force a redefinition of the project's goal.
 
-## 4. Principio central: desacoplamiento de componentes
+When an AI generates the content of the Definition or the Roadmap, the Challenge acts as a direct control against its typical failure modes: hallucination, overconfidence, and moving forward on unverified assumptions.
 
-DCB separa la meta del proyecto de su ejecución en dos artefactos independientes:
+## 4. Core principle: decoupling of components
 
-| Artefacto | Responde a | Naturaleza |
+DCB separates the project's goal from its execution into two independent artifacts:
+
+| Artifact | Answers | Nature |
 | --- | --- | --- |
-| **Archivo de Definición** | El Qué | Estático — objetivos, reglas de negocio, alcance y restricciones |
-| **Roadmap** | El Cómo | Dinámico y versionado con git — ruta técnica de implementación |
+| **Definition file** | The What | Static — goals, business rules, scope, and constraints |
+| **Roadmap** | The How | Dynamic and versioned with git — technical implementation path |
 
-Si el Roadmap cambia, la Definición se mantiene intacta.
+If the Roadmap changes, the Definition stays intact.
 
-## 5. El flujo de trabajo
+## 5. The workflow
 
 ### 5.1 Define
 
-Se extraen los requerimientos y se redacta una primera propuesta del Archivo de Definición. La misma etapa se repite después para generar el Roadmap, una vez que la Definición está consolidada.
+Requirements are gathered and a first draft of the Definition file is written. Once the Definition is consolidated, this same stage repeats to produce the Roadmap.
 
 ### 5.2 Challenge
 
-El artefacto recién generado —Definición o Roadmap— se audita antes de aceptarse, con expertos, IA, o ambos combinados (ver sección 1).
+The artifact that was just produced —Definition or Roadmap— is audited before being accepted, by experts, AI, or both combined (see section 1).
 
-Se aplica dos veces:
+It's applied twice:
 
-1. **Sobre la Definición** — verifica que el "Qué" esté completo y sin ambigüedades.
-2. **Sobre el Roadmap** — verifica que el "Cómo" sea coherente con la Definición aprobada y técnicamente viable.
+1. **On the Definition** — verifies that the "What" is complete and unambiguous.
+2. **On the Roadmap** — verifies that the "How" is consistent with the approved Definition and technically feasible.
 
-Un artefacto se considera consolidado cuando supera su Challenge correspondiente.
+An artifact is considered consolidated once it passes its corresponding Challenge.
 
 ### 5.3 Build
 
-Con la Definición blindada y el Roadmap validado, se construye. Si surge un imprevisto que afecta al Roadmap, se corrige el archivo y vuelve a pasar por Challenge, sin tocar la Definición. Si el imprevisto revela que el "Qué" original era inviable, se vuelve a Define.
+With the Definition locked in and the Roadmap validated, construction begins. If something unexpected comes up that affects the Roadmap, the file is corrected and goes through Challenge again, without touching the Definition. If the unexpected issue reveals that the original "What" was infeasible, it goes back to Define.
 
-## 6. Cuándo usarla
+## 6. When to use it
 
-* Vas a usar IA para diseñar o planear un sistema, no solo para generar código puntual.
-* El proyecto tiene requerimientos ambiguos o cambiantes.
-* Trabajas solo y necesitas un mecanismo externo de verificación.
-* Construir sobre un diseño equivocado te sale caro.
+* You're using AI to design or plan a system, not just to generate isolated code.
+* The project has ambiguous or changing requirements.
+* You're working solo and need an external verification mechanism.
+* Building on the wrong design would be costly.
 
-## 7. Cuándo no usarla
+## 7. When not to use it
 
-* Tareas puntuales o acotadas: una función suelta, un snippet, un fix menor.
-* Prototipos rápidos donde el objetivo es explorar, no blindar un diseño.
-* Proyectos donde el "Qué" ya está completamente claro.
+* One-off or narrow tasks: a standalone function, a snippet, a minor fix.
+* Rapid prototypes where the goal is to explore, not lock down a design.
+* Projects where the "What" is already completely clear.
 
-## 8. Pros y riesgos
+## 8. Pros and risks
 
 **Pros**
 
-* Reduce el riesgo de construir sobre alucinaciones o supuestos sin verificar.
-* El Roadmap cambia sin comprometer el objetivo del proyecto.
-* Da trazabilidad: cada Roadmap referencia qué parte de la Definición implementa.
+* Reduces the risk of building on hallucinations or unverified assumptions.
+* The Roadmap can change without compromising the project's goal.
+* Provides traceability: each Roadmap references which part of the Definition it implements.
 
-**Riesgos**
+**Risks**
 
-* Si quien ejecuta el Challenge no tiene autoridad real para bloquear el artefacto, se vuelve un trámite sin fricción real.
-* Un artefacto "consolidado tras Challenge" puede dar falsa sensación de seguridad durante el Build.
-* Requiere disciplina para no saltarse el Challenge bajo presión de tiempo.
+* If whoever runs the Challenge lacks real authority to block the artifact, it becomes a rubber-stamp step with no real friction.
+* An artifact "consolidated after Challenge" can create a false sense of safety during the Build.
+* Requires discipline not to skip the Challenge under time pressure.
 
-## 9. Artefactos de la metodología
+## 9. Artifacts of the methodology
 
-### 9.1 Archivo de Definición (el Qué)
+### 9.1 Definition file (the What)
 
-Documento maestro y estático. Objetivos, reglas de negocio, alcance y restricciones del sistema. No se modifica tras consolidarse, salvo inviabilidad estructural.
+Master, static document: goals, business rules, scope, and constraints of the system. It isn't modified once consolidated, except in cases of structural infeasibility.
 
-### 9.2 Roadmap (el Cómo)
+### 9.2 Roadmap (the How)
 
-Documento dinámico que traza la ruta técnica de implementación, sin depender de referencias a un archivo concreto de Definición.
+Dynamic document that lays out the technical implementation path, without depending on references to a specific Definition file.
 
-Cada Roadmap vive en un único archivo. El historial de cambios se sigue con git (commits), no duplicando el archivo por versión. La excepción es cuando el proyecto no usa ningún sistema de control de versiones: en ese caso sí conviene nombrar los archivos con sufijos v1, v2, v3, etc., para poder distinguirlos.
+Each Roadmap lives in a single file, and its name should be descriptive — never generic like `roadmap.md`, since a single feature can end up with several roadmaps. Recommended convention:
 
-*Estructura recomendada del archivo de Roadmap:*
-Cada Roadmap es autocontenido y debe estructurarse internamente con:
+* `roadmap-<feature>.md` when the delivery is resolved in a single roadmap.
+* `roadmap-<feature>-<slice>.md` when the feature is split into several — by technical layer (`roadmap-auth-backend.md`, `roadmap-auth-frontend.md`) or by sub-delivery.
 
-* **Definición:** Una breve descripción inicial del problema específico que resuelve ese roadmap y qué parte de la Definición aprobada cubre, sin nombrar archivos ni anclarlo a un documento externo.
-* **Fases y Tareas Atómicas:** Desglose paso a paso (ej. Backend, Frontend) organizado con casillas de verificación (`- [ ]`) para el seguimiento del Build.
+Change history is tracked with git (commits), not by duplicating the file per version. The exception is when the project doesn't use any version control system: in that case it does make sense to add a v1, v2, v3, etc. suffix to distinguish versions.
 
-### 9.3 Prompts de Challenge
+*Recommended structure for the Roadmap file:*
 
-Instrucciones para auditar la Definición y el Roadmap. Este repositorio no incluye prompts de ejemplo: deben redactarse según los riesgos reales del proyecto.
+Each Roadmap is self-contained and should be internally structured with:
 
-## 10. Cómo separar la Definición de los Roadmaps
+* **Definition:** a short initial description of the specific problem this roadmap solves and which part of the approved Definition it covers, without naming files or anchoring it to an external document.
+* **Phases and Atomic Tasks:** a step-by-step breakdown (e.g. Backend, Frontend) organized with checkboxes (`- [ ]`) to track the Build.
 
-* **Un único Archivo de Definición por proyecto**, en la raíz del repositorio. No se fragmenta por módulo ni por sprint.
-* **Un Roadmap por unidad de entrega** (módulo, feature, milestone técnico), no uno monolítico.
-* **Cada Roadmap es autocontenido** y describe la entrega que implementa sin depender de referencias a otros artefactos ni de nombres de archivo.
-* **La Definición no lleva detalles de implementación** — stack, librerías, endpoints, esquemas de base de datos.
-* **El Roadmap no redefine objetivos de negocio.** Si al construirlo aparece que la Definición es ambigua o inviable, se vuelve a Define.
-* **Versionado con git.** Definición y Roadmaps son archivos únicos; cada cambio se registra como un commit, y ese historial es el que muestra la evolución del artefacto. Solo si el proyecto no usa git u otro control de versiones tiene sentido nombrar archivos como v1, v2, v3.
+### 9.3 Challenge Prompts
 
-## 11. Estructura de proyecto recomendada
+Instructions for auditing the Definition and the Roadmap. This repository doesn't include sample prompts: they should be written according to each project's actual risks.
+
+## 10. How to separate the Definition from the Roadmaps
+
+* **A single Definition file per project**, at the root of the repository. It isn't fragmented by module or by sprint.
+* **One or more Roadmaps per unit of delivery** (module, feature, technical milestone). A feature can be resolved with a single vertical roadmap, or split into several — by technical layer (backend, frontend) or by sub-delivery — as needed; what never happens is a monolithic roadmap covering the whole system.
+* **Each Roadmap is self-contained** and describes the delivery it implements without depending on references to other artifacts.
+* **File naming is descriptive.** Each roadmap is named following the convention in section 9.2 (`roadmap-<feature>.md` or `roadmap-<feature>-<slice>.md`), never generically.
+* **The Definition doesn't carry implementation details** — stack, libraries, endpoints, database schemas.
+* **The Roadmap doesn't redefine business goals.** If building it out reveals that the Definition is ambiguous or infeasible, it goes back to Define.
+* **Versioned with git.** The Definition and Roadmaps are single files; every change is recorded as a commit, and that history is what shows the artifact's evolution. Only when a project doesn't use git or another version control system does it make sense to name files v1, v2, v3.
+
+## 11. Recommended project structure
 
 ```
-mi-proyecto/
-├── definition.md                  # El Qué — único, estático, fuente de verdad
-├── CHALLENGE_LOG.md               # Historial de Challenges sobre la Definición
+my-project/
+├── definition.md                  # The What — single, static, source of truth
+├── CHALLENGE_LOG.md               # History of Challenges on the Definition
 │
 ├── roadmaps/
 │   ├── roadmap-auth/
-│   │   ├── roadmap.md
+│   │   ├── roadmap-auth-backend.md
+│   │   ├── roadmap-auth-frontend.md
 │   │   └── challenge-log.md
-│   ├── roadmap-pagos/
-│   │   ├── roadmap.md
+│   ├── roadmap-payments/
+│   │   ├── roadmap-payments.md
 │   │   └── challenge-log.md
-│   └── roadmap-notificaciones/
-│       ├── roadmap.md
+│   └── roadmap-notifications/
+│       ├── roadmap-notifications.md
 │       └── challenge-log.md
 │
 ├── prompts/
 │   └── challenge/
-│       └── ...                    # Prompts escritos por el equipo (ver sección 9.3)
+│       └── ...                    # Prompts written by the team (see section 9.3)
 │
-└── src/                            # Código construido a partir de los roadmaps consolidados
+└── src/                            # Code built from the consolidated roadmaps
 
 ```
 
-La Definición aislada en la raíz se encuentra sin revisar código ni roadmaps. Cada carpeta en `roadmaps/` es autocontenida: tiene su propio archivo de roadmap y su propio log de Challenge. Los cambios sobre `roadmap.md` a lo largo del tiempo se siguen con git, no con archivos duplicados. Los `challenge-log.md` registran quién cuestionó qué y cómo se resolvió.
+The Definition sits isolated at the root, so it can be reviewed without going through code or roadmaps. Each folder under `roadmaps/` is self-contained: it groups the roadmaps for a single feature —one or several, depending on whether it makes sense to split it— along with a shared Challenge log. Changes to each roadmap file over time are tracked with git, not with duplicated files. The `challenge-log.md` records who challenged which roadmap and how it was resolved.
 
-## 12. Roadmaps como Spec-Driven Development hiperespecífico
+## 12. Roadmaps as hyper-specific Spec-Driven Development
 
-Un Roadmap dentro de DCB ya pasó por Define, ya fue cuestionado en Challenge, y ya está atado a una Definición aprobada. Al llegar al Build no queda ambigüedad de negocio ni de diseño pendiente — solo ejecución.
+A Roadmap within DCB has already gone through Define, has already been challenged, and is already tied to an approved Definition. By the time it reaches Build, there's no remaining business or design ambiguity — only execution.
 
-Para equipos que usan agentes de codificación (Claude Code u otros), esto significa que un Roadmap consolidado se le puede entregar directamente al agente como spec de trabajo:
+For teams using coding agents (Claude Code or others), this means a consolidated Roadmap can be handed directly to the agent as a work spec:
 
-* Las decisiones de arquitectura y alcance ya se cerraron en Define + Challenge, no se toman durante el Build.
-* El agente no infiere intención de negocio — vive en la Definición referenciada.
-* Cada paso del Roadmap es una tarea atómica y verificable.
-* Si el agente encuentra una inconsistencia, el protocolo ya existe: corregir el Roadmap (y dejarlo registrado en git), o volver a Define si el problema es de fondo.
+* Architecture and scope decisions were already locked in during Define + Challenge, not made during the Build.
+* The agent doesn't infer business intent — that intent lives in the referenced Definition.
+* Each step of the Roadmap is an atomic, verifiable task.
+* If the agent finds an inconsistency, the protocol already exists: correct the Roadmap (logging it in git), or go back to Define if the problem is fundamental.
 
-## 13. DCB y Vertical Slice Architecture
+## 13. DCB and Vertical Slice Architecture
 
-DCB combina bien con Vertical Slice Architecture (VSA): organizar el sistema por feature de punta a punta en vez de por capa técnica horizontal.
+DCB pairs well with Vertical Slice Architecture (VSA): organizing the system by end-to-end feature instead of by horizontal technical layer.
 
-Una feature de VSA es un Roadmap de DCB. Ambos referencian la misma Definición central.
+A VSA feature translates into one or more DCB Roadmaps, all referencing the same central Definition. Splitting a feature into several roadmaps —for example, separating backend and frontend within the same folder— doesn't break the VSA principle: the feature is still the unit of delivery and of Challenge, it's just that its How is split into smaller pieces that are easier to audit separately.
 
-Aplicar DCB por feature trae:
+Applying DCB per feature brings:
 
-* **Challenge más acotado.** Auditar una sola feature es más rápido que auditar todo el sistema junto.
-* **Paralelización real.** Distintas features pueden estar en distintas etapas de DCB al mismo tiempo.
-* **Cambios contenidos.** Corregir el Roadmap de una feature no afecta al resto.
-* **Trazabilidad feature por feature.**
+* **A narrower Challenge.** Auditing a single feature is faster than auditing the whole system at once.
+* **Real parallelization.** Different features can be at different stages of DCB at the same time.
+* **Contained changes.** Fixing one feature's Roadmap doesn't affect the rest.
+* **Feature-by-feature traceability.**
 
-## 14. Ejemplo de uso
+## 14. Example
 
-Proyecto: una plataforma de reservas de canchas deportivas para un club.
+Project: a sports court booking platform for a club.
 
-**Paso 1 — Define (Definición).**
-Se recogen los requerimientos del cliente (reglas de reserva, roles de usuario, cancelaciones, restricciones legales) y se redacta la primera versión de la Definición.
+**Step 1 — Define (Definition).**
+The client's requirements are gathered (booking rules, user roles, cancellations, legal constraints) and a first version of the Definition is drafted.
 
-**Paso 2 — Challenge sobre la Definición.**
-El equipo (expertos + IA) audita el borrador:
+**Step 2 — Challenge on the Definition.**
+The team (experts + AI) audits the draft and finds gaps:
 
-* Falta especificar qué pasa si dos usuarios reservan la misma cancha en el mismo instante.
-* Falta definir el manejo de cancelaciones por lluvia en canchas al aire libre.
+* It doesn't specify what happens when two users book the same court at the same instant.
+* It doesn't define how rain cancellations are handled for outdoor courts.
 
-Se registra en `CHALLENGE_LOG.md`, se corrige, se repite hasta no tener objeciones abiertas. La Definición queda consolidada.
+This gets logged in `CHALLENGE_LOG.md`, fixed, and repeated until there are no open objections left. The Definition is consolidated.
 
-**Paso 3 — Define (Roadmap con definición y tareas).**
-Se genera `roadmaps/roadmap-reservas/roadmap.md`:
+**Step 3 — Define (Roadmap with definition and tasks).**
+`roadmaps/roadmap-bookings/roadmap-bookings.md` is created:
 
 ```markdown
-# Roadmap: Reservas de Canchas
-## 1. Definición
-- **Qué resuelve:** Implementa la lógica de bloqueo y registro de turnos referenciando la Definición, sección 3.
-- **Alcance:** Excluye pagos online por ahora; solo reserva operativa interna.
+# Roadmap: Court Bookings
+## 1. Definition
+- **What it solves:** Implements the locking and slot-registration logic referencing the Definition, section 3.
+- **Scope:** Excludes online payments for now; internal booking operations only.
 
-## 2. Fases y Tareas
-### Fase 1: Backend (.NET)
-- [ ] Crear endpoint de reserva asegurando bloqueo de concurrencia.
-### Fase 2: Frontend (Next.js)
-- [ ] Construir vista de calendario y botón de confirmación.
+## 2. Phases and Tasks
+### Phase 1: Backend (.NET)
+- [ ] Create the booking endpoint with concurrency locking.
+### Phase 2: Frontend (Next.js)
+- [ ] Build the calendar view and confirmation button.
 
 ```
 
-NOTA: Los roadmaps deben ser siempre deterministas, nada de cosas "por confirmar" ni nada pretendiendo que sea agregado más adelante, para eso es el Challenge. Tampoco pueden tener referencias a otros roadmaps ni a la Definición. Los cambios posteriores sobre el mismo archivo son exclusivos para correcciones, no para agregar más contenido; ese historial de cambios queda en git. Si se quiere agregar más contenido al feature de un roadmap ya completado, se debe hacer un roadmap aparte.
+> Roadmaps must always be deterministic: no "to be confirmed" items, no pretending something will be added later — that's what the Challenge is for. They also can't reference other roadmaps or the Definition. Later changes to the same file are strictly for corrections, not for adding new content; that history lives in git. If a feature from an already-completed roadmap needs to be extended, a separate roadmap is created instead.
+>
+> The roadmap is for design decisions and system contracts, not a log of every small adjustment made along the way.
 
-"El roadmap es para decisiones de diseño y contrato del sistema, no un log de cada ajuste fino que hiciste sobre la marcha."
+**Step 4 — Challenge on the Roadmap.**
+It's flagged that the proposed locking mechanism won't scale well with multiple concurrent courts. `roadmap-bookings.md` is corrected and re-audited; the change is documented in `challenge-log.md` and recorded as a commit in git.
 
-**Paso 4 — Challenge sobre el Roadmap.**
-Se objeta que el mecanismo de bloqueo propuesto no escala bien con múltiples canchas concurrentes. Se corrige `roadmap.md` y se vuelve a auditar; el cambio queda documentado en `challenge-log.md` y registrado como commit en git.
-
-**Paso 5 — Build.**
-El Roadmap consolidado se entrega directamente a un agente de codificación como spec de ejecución. Durante el Build aparece un imprevisto (la librería elegida no soporta el motor de base de datos del cliente): se corrige `roadmap.md`, se documenta el motivo en `challenge-log.md`, y el cambio queda versionado en git, sin tocar la Definición.
+**Step 5 — Build.**
+The consolidated Roadmap is handed directly to a coding agent as an execution spec. During the Build, something unexpected comes up (the chosen library doesn't support the client's database engine): `roadmap-bookings.md` is corrected, the reason is documented in `challenge-log.md`, and the change is versioned in git, without touching the Definition.
