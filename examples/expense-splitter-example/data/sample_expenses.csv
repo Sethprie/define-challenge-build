@@ -1,0 +1,4 @@
+payer,amount,participants
+ana,60.00,ana;bob;cara
+bob,15.00,ana;bob
+cara,9.00,ana;bob;cara
